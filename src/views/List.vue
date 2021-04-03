@@ -2,7 +2,7 @@
     <div class='content_page'>
         <div class='content_body'>
             <div class='content_button'>
-                <button class='add primary' @click='add' title='添加'>添加</button>
+                <button class='add primary' @click='addItem' title='添加'>添加</button>
             </div>
             <div class='content_table'>
                 <table>
@@ -19,37 +19,53 @@
                             <td>
                                 <div v-if='index === currentIndex'>
                                     <input
-                                        v-model='item.users'
-                                        title='users'
+                                        v-model='item.name'
+                                        title='name'
                                     />
                                 </div>
-                                <span :title='item.users' v-else>{{item.users}}</span>
+                                <span :title='item.name' v-else>{{item.name}}</span>
                             </td>
-                            <td :title='item.date'>
+                            <td :title='item.sex'>
                               <div v-if='index === currentIndex'>
                                     <input
-                                        v-model='item.date'
+                                        v-model='item.sex'
                                         title='sex'
                                     />
                                 </div>
-                                <span :title='item.date' v-else>{{item.date}}</span>
+                                <span :title='item.sex' v-else>{{item.sex ? '男' : '女'}}</span>
+                            </td>
+                            <td :title='item.birth'>
+                              <div v-if='index === currentIndex'>
+                                    <input
+                                        v-model='item.birth'
+                                        title='birth'
+                                    />
+                                </div>
+                                <span :title='item.birth' v-else>{{item.birth}}</span></td>
+                            <td :title='item.address'>
+                              <div v-if='index === currentIndex'>
+                                  <input
+                                      v-model='item.address'
+                                      title='birth'
+                                  />
+                              </div>
+                              <span :title='item.address' v-else>{{item.address}}</span>
                             </td>
                             <td>
                                 <div v-if='index === currentIndex'>
                                     <button
                                         class='primary confirm'
-                                        @click='saveItem(item)'
+                                        @click='confirm(item)'
                                     >确定</button>
-                                    &nbsp;&nbsp;
                                     <button
                                         @click='cancel(item)'
                                     >取消</button>
                                 </div>
                                 <span v-else>
-                                    <span @click='edit(index)'>
+                                    <span @click='editItem(index)'>
                                         edit
                                     </span>
-                                    <span @click='delItem(item)'>delete</span>
+                                    <span @click='deleteItem(index, item)'>delete</span>
                                 </span>
                             </td>
                         </tr>
@@ -61,16 +77,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
-import { compositionApi } from '@/components/composables/index'
+import { defineComponent } from 'vue'
 export default defineComponent({
-  name: 'About',
-  setup () {
-    const thead = reactive(['id', 'users', 'date', 'option'])
-    return {
-      thead,
-      ...compositionApi('/abouts')
-    }
-  }
+  name: 'List'
+
 })
 </script>
