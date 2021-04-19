@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-04-19 11:16:34
+ * @LastEditTime: 2021-04-19 17:29:00
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \vue3-ts-demo\.eslintrc.js
+ */
 module.exports = {
   root: true,
   env: {
@@ -13,6 +21,10 @@ module.exports = {
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'quotes': 'off', //使用双引号，关闭,
+    'semi': 'off',
+    'comma-dangle': 'off',
+    'vue/no-deprecated-slot-attribute': 'off',
   }
 }
