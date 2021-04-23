@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-19 11:16:34
- * @LastEditTime: 2021-04-19 17:29:00
+ * @LastEditTime: 2021-04-23 11:37:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue3-ts-demo\.eslintrc.js
@@ -26,5 +26,6 @@ module.exports = {
     'semi': 'off',
     'comma-dangle': 'off',
     'vue/no-deprecated-slot-attribute': 'off',
+    'explicit-module-boundary-types': 'off'
   }
 }

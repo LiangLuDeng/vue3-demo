@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-19 11:16:34
- * @LastEditTime: 2021-04-19 11:27:44
+ * @LastEditTime: 2021-04-23 18:53:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue3-ts-demo\src\views\List.vue
 -->
 <template>
-  <div class="content_page">
+  <div class="wrapper">
     <div class="content_body">
       <div class="content_button">
         <button class="add primary" @click="addItem" title="添加">添加</button>
