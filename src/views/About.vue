@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-19 11:16:34
- * @LastEditTime: 2021-04-23 19:24:23
+ * @LastEditTime: 2021-04-25 17:22:11
  * @LastEditors: Please set LastEditors
  * @Description: 记一笔（计算器界面）
  * @FilePath: \vue3-ts-demo\src\views\About.vue
@@ -49,7 +49,80 @@
   </div>
 </template>
 
-<style lang="less">
+<script lang="ts">
+import { defineComponent, reactive, computed, ref } from "vue";
+import { compositionApi } from "@/components/composables/index";
+import { getStorage, setStorage } from "@/utils/utils";
+import { operateBtn, operator } from "@/utils/tools";
+export default defineComponent({
+  name: "About",
+  setup () {
+    const thead = reactive(["id", "users", "date", "option", "bz"]);
+    const formValue = reactive({ bz: "" });
+    const storeLabels = getStorage("label_store") || [];
+    const textArgs1 = ref<string[]>([]);
+    const activeT = ref<number>(1);
+    const activeL = ref<string>('');
+    const tabsD: operator[] = [
+      {
+        text: "支出",
+        value: 1,
+      },
+      {
+        text: "收入",
+        value: 2,
+      },
+    ];
+    const showStr = computed(() => {
+      return textArgs1.value.join(" ");
+    });
+    const activeTab = computed(() => {
+      return activeT.value;
+    });
+    const activeLabel = computed(() => {
+      return activeL.value || '';
+    });
+    function clickItem (item: operator) {
+      // console.log(item, 'click')
+      if (!["delete", "clear", "enter"].includes(`${item.value}`)) {
+        textArgs1.value.push(`${item.text}`);
+      }
+      if (item.value === "enter") {
+        // console.log("enter", formValue.bz);
+      }
+      if (item.value === "delete") {
+        textArgs1.value.pop();
+      }
+      if (item.value === "clear") {
+        textArgs1.value = [];
+      }
+    }
+    function pickTab (p: number) {
+      activeT.value = p;
+    }
+    function pickLabel (p: string) {
+      activeL.value = p;
+    }
+    return {
+      thead,
+      labels: storeLabels,
+      operateBtn,
+      clickItem,
+      showStr,
+      formValue,
+      tabsD,
+      pickTab,
+      activeTab,
+      activeLabel,
+      activeL,
+      pickLabel
+      // ...compositionApi("/abouts"),
+    };
+  },
+});
+</script>
+
+<style lang="less" scoped>
 .calculate_container {
   // border: 1px solid pink;
   // display: flex;
@@ -58,20 +131,22 @@
 }
 .label_area {
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 6px;
   margin: 8px 0px;
   max-height: 100px;
   overflow-y: auto;
   border-bottom: 1px dashed #cdcde6;
   padding: 8px 0px;
   .label_item {
-    border: 1px solid #cdcde6;
+    border: 1px dotted #cdcde6;
     border-radius: 4px;
     padding: 4px 8px;
     transition: .2s ease all;
   }
   .active_label_item {
-    background: rgba(94, 85, 214, 0.698);
+    background: rgba(94, 85, 214, 0.65);
     color: #fff;
   }
 }
@@ -153,76 +228,3 @@
   font-size: 15px;
 }
 </style>
-
-<script lang="ts">
-import { defineComponent, reactive, computed, ref } from "vue";
-import { compositionApi } from "@/components/composables/index";
-import { getStorage, setStorage } from "@/utils/utils";
-import { operateBtn, operator } from "@/utils/tools";
-export default defineComponent({
-  name: "About",
-  setup () {
-    const thead = reactive(["id", "users", "date", "option", "bz"]);
-    const formValue = reactive({ bz: "" });
-    const storeLabels = getStorage("label_store") || [];
-    const textArgs1 = ref<string[]>([]);
-    const activeT = ref<number>(1);
-    const activeL = ref<string>('');
-    const tabsD: operator[] = [
-      {
-        text: "支出",
-        value: 1,
-      },
-      {
-        text: "收入",
-        value: 2,
-      },
-    ];
-    const showStr = computed(() => {
-      return textArgs1.value.join(" ");
-    });
-    const activeTab = computed(() => {
-      return activeT.value;
-    });
-    const activeLabel = computed(() => {
-      return activeL.value || '';
-    });
-    function clickItem (item: operator) {
-      // console.log(item, 'click')
-      if (!["delete", "clear", "enter"].includes(`${item.value}`)) {
-        textArgs1.value.push(`${item.text}`);
-      }
-      if (item.value === "enter") {
-        console.log("enter", formValue.bz);
-      }
-      if (item.value === "delete") {
-        textArgs1.value.pop();
-      }
-      if (item.value === "clear") {
-        textArgs1.value = [];
-      }
-    }
-    function pickTab (p: number) {
-      activeT.value = p;
-    }
-    function pickLabel (p: string) {
-      activeL.value = p;
-    }
-    return {
-      thead,
-      labels: storeLabels,
-      operateBtn,
-      clickItem,
-      showStr,
-      formValue,
-      tabsD,
-      pickTab,
-      activeTab,
-      activeLabel,
-      activeL,
-      pickLabel
-      // ...compositionApi("/abouts"),
-    };
-  },
-});
-</script>

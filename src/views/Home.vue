@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-19 11:16:34
- * @LastEditTime: 2021-04-23 14:57:54
+ * @LastEditTime: 2021-04-25 17:22:21
  * @LastEditors: Please set LastEditors
  * @Description:  标签设置页
  * @FilePath: \vue3-ts-demo\src\views\Home.vue
@@ -10,7 +10,7 @@
 <template>
   <div class="home">
     <div class="labels_wrap">
-      <div v-for="item in labels" :key="item.id">{{ item.value }}</div>
+      <div v-for="item in showLabels" :key="item.id">{{ item.value }}</div>
       <div class="add_btn" @click="handleModalVisible(true)">+ 新增标签</div>
     </div>
   </div>
@@ -19,8 +19,9 @@
     title="新的标签叫什麼呢"
     :show-cancel-button="false"
     :show-confirm-button="false"
+    co
   >
-    <van-form @submit="onSubmit">
+    <van-form @submit="onSubmit" >
       <van-field
         input-align="center"
         v-model="state.username"
@@ -84,13 +85,18 @@ export default defineComponent({
         id: guid(),
         value: value.label,
       }
-      const currentLabels = (storeLabels).concat(newLabel);
+      const currentLabels = (labels.value).concat(newLabel);
       setStorage("label_store", currentLabels)
       labels.value = currentLabels;
       show.value = false;
+      state.username = '';
       Notify({ type: 'success', message: '新增成功' });
     };
-    return { show, state, labels, showItem, handleModalVisible, onSubmit };
+    const showLabels = computed(() => {
+      return labels.value;
+    });
+    // console.log(showLabels, 'showLabels')
+    return { show, state, showLabels, labels, showItem, handleModalVisible, onSubmit };
   },
   methods: {
 
