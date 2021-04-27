@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-19 11:16:34
- * @LastEditTime: 2021-04-25 17:22:21
+ * @LastEditTime: 2021-04-27 16:25:59
  * @LastEditors: Please set LastEditors
  * @Description:  标签设置页
  * @FilePath: \vue3-ts-demo\src\views\Home.vue
@@ -117,6 +117,7 @@ export default defineComponent({
     align-items: center;
     white-space: nowrap;
     cursor: pointer;
+    background: #fff;
     &:active {
       box-shadow: inset 0 -2px 0 0 #cdcde6, inset 0 0 1px 1px rgb(221, 221, 221),
         0 1px 1px 1px rgba(30, 35, 90, 0.4);

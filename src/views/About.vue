@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-19 11:16:34
- * @LastEditTime: 2021-04-25 17:22:11
+ * @LastEditTime: 2021-04-27 16:27:06
  * @LastEditors: Please set LastEditors
  * @Description: 记一笔（计算器界面）
  * @FilePath: \vue3-ts-demo\src\views\About.vue
@@ -140,10 +140,11 @@ export default defineComponent({
   border-bottom: 1px dashed #cdcde6;
   padding: 8px 0px;
   .label_item {
-    border: 1px dotted #cdcde6;
+    border: 1px solid rgba(100, 91, 219, 0.65);
     border-radius: 4px;
     padding: 4px 8px;
     transition: .2s ease all;
+    color: #333;
   }
   .active_label_item {
     background: rgba(94, 85, 214, 0.65);
